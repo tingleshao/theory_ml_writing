@@ -1,0 +1,105 @@
+% ----------------------------------------------------------------
+% Article Class (This is a LaTeX2e document)  ********************
+% ----------------------------------------------------------------
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage{amsmath,amsthm}
+\usepackage{amsfonts}
+% THEOREMS -------------------------------------------------------
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\usepackage{amssymb}
+\numberwithin{equation}{section}
+% ----------------------------------------------------------------
+\begin{document}
+
+\title{The Derivation of Generalization Bounds for Distance Weighted Discrimination}%
+\author{Chong Shao}%
+%\address{}%
+%\thanks{}%
+%\date{}%
+% ----------------------------------------------------------------
+
+\maketitle
+% ----------------------------------------------------------------
+\section{Introduction}
+\section{PAC Learning Model}
+Probably Approximate Correct (PAC) learning framework was introduced by Valiant [1], to help define the class of learnable concepts in terms of sample complexity, time complexity and space complexity of a learning algorithm [2]. In the previous definition of PAC-learning, sample complexity is related to the number of training sample points needed to achieve an approximate solution.
+\subsection{Definitions}
+Several definitions need to be introduced before introducing the PAC learning model. \\[0.2cm]
+1. $\mathcal{X}$: the set of all possible examples.\\[0.2cm]
+2. $\mathcal{Y} = \{0,1\}$: set of all possible labels in binary classification. \\[0.2cm]
+3. A \emph{concept} \(c: \mathcal{X} \rightarrow \mathcal{Y}\): a mapping from \(\mathcal{X}\) to \(\mathcal{Y}\). \\[0.2cm]
+4. A \emph{concept class} $C$: a set of concepts.  \\[0.2cm]
+5. Assume that examples are independently and identically distributed (i.i.d) according to some fixed distribution $D$. $D$ is unknown. \\[0.2cm]
+6. The learning algorithm receives a set of training examples $S = (x_1, \dots , x_m)$ and the corresponding labels $C=(c(x_1), \dots, c(x_m))$. $c \in C$ is called the \emph{target concept} that we want to learn. \\[0.2cm]
+7. The learning algorithm will use the training examples to produce a hypothesis $h_S \in H$ selected from a hypothesis set $H$ that maps $\mathcal{X}$ to $\mathcal{Y}$. Note that $H$ and $C$ may not be the same.\\[0.2cm]
+8. It is considered good if yielded hypothesis $h_S$ has a small generalization error. \\[0.2cm]
+9. Definition of \textbf{Generalization error}:[2] \\[0.2cm]
+Given a hypothesis $h \in H$, a target concept $c \in C$, and an underlying distribution $D$, the generalization error $R(h)$ is defined by
+\[R(h)= \underset{x\sim D}{\text{Pr}}[h(x)\neq c(x)]= \underset{x \sim D}{\text{E}}[1_{h(x) \neq c(x)}]\]
+The generalization error $R(h)$ cannot be directly computed since the concept $c$ is unknown. However the \emph{empirical error} of a hypothesis can be computed to estimate the generalization error. \\[0.2cm]
+10. Definition of \textbf{Empirical error}: [2] \\[0.2cm]
+Given a hypothesis $h \in H$, a target concept $c \in C$, and a sample $S = (x_1,\dots,x_m)$ with corresponding labels $C = (c(x_1),\dots,c(x_m))$, the generalization error $R(h)$ is defined by
+\[\widehat{R}(h)= \frac{1}{m}\sum_{i=1}^{m}1_{h(x_i) \neq c(x_i)}\]
+It can be proved that the expectation of empirical error based on an i.i.d. sample $S$ equals to the generalization error.
+\begin{align*}
+ \underset{S \sim D^m}{\text{E}}[\widehat{R}(h)] &= \frac{1}{m}\sum_{i=1}^{m}\underset{S \sim D^m}{\text{E}}[1_{h(x_i) \neq c(x_i)}] \\
+ &= \frac{1}{m}\sum_{i=1}^{m}\underset{S \sim D^m}{\text{E}}[1_{h(x) \neq c(x)}] \text{  (Because samples are drown i.i.d.)} \\
+ &= \underset{S \sim D^m}{\text{E}}[1_{h(x) \neq c(x)}] \\
+ &= \underset{x \sim D}{\text{E}}[1_{h(x) \neq c(x)}] \\
+ &= R(h)
+\end{align*}
+\subsection{PAC Model}
+[2] A concept class $C$ is called PAC-learnable if the hypothesis returned by the algorithm after observing a number of points in polynomial of $1/\epsilon$ and $1/\delta$ has error at most $\epsilon$ with probability at least $1-\delta$. Since $\epsilon$ and $\delta$ are small, it is approximately correct with high probability. \\[0.2cm]
+\textbf{Formal definition}:\\[0.2cm]
+A concept class $C$ is said to be PAC-learnable if there exists an algorithm $\mathcal{A}$ and a polynomial function such that for any $\epsilon > 0$ and $\delta > 0$, for all distributions $D$ on $\mathcal{X}$ and for any target concept $c \in C$, for following inequality holds for any sample size $ m \geq poly(1/\epsilon,1/\delta,n,size(c) )$:
+\[\underset{S \sim D^m}{\text{Pr}}[R(h_S) \leq \epsilon ] \geq 1 - \delta \]
+Note that PAC does not make assumption on the distribution D. For an algorithm, the concept class $C$ is determined but a particular concept $c$ is unknown. \\[0.2cm]
+(It can be shown that this inequality can be used to bound generalization error)
+\subsection{Example}
+1. finite H, consistent case \\[0.2cm]
+can get a inequality for $R(h)$\\[0.2cm]
+2. finite H, inconsistent case \\[0.2cm]
+can get a inequality for $R(h)$
+\subsection{Rademacher Complexity}
+Rademacher Complexity: \\[0.2cm]
+In order to produce generalization bound for infinite hypothesis sets, (for example, lines in 2D plane), some tools are required. One is Rademacher Complexity. \\[0.2cm]
+Definition of \textbf{Empirical Rademacher complexity}: \\[0.2cm]
+Let $G$ be a family of functions mapping from $Z$ to $[a,b]$ and $S=(z_1,\dots,z_m)$ a fixed sample of size $m$ with elements in $Z$. And we write $\mathbf{g}_S = (g(z_1),\dots,g(z_m))^T$. The empirical Rademacher complexity of $G$ with respect to $S$ is defined as:
+\[\mathfrak{\widehat{R}}_S(G)=\underset{\mathbf{\sigma}}{\text{E}}[\underset{g \in G}{\text{sup}}\frac{1}{m}\sum_{i=1}^{m}\sigma_ig(z_i)]=\underset{\mathbf{\sigma}}{\text{E}}[\underset{g \in G}{\text{sup}}\frac{\mathbf{\sigma}\cdot\mathbf{g}_S}{m}]\]
+$\mathbf{\sigma} = (\sigma_1,\dots, \sigma_m)^T$. And $\sigma_i$'s are independent uniform random variables taking values $\{-1,+1\}$. Like tossing a fair coin m times. \\[0.2cm]
+The definition can be understood as a measure of how well the function class $G$ correlates with $\mathbf{\sigma}$ over the sample $S$. Since $\mathbf{\sigma}$ can be understood as noise, Empirical Rademacher complexity measures the richness of function class $G$. A richer or more complex function class $G$ can generate more $\mathbf{g}_S$ and will on average better correlate with random noise.\\[0.2cm]
+Definition of \textbf{Rademacher Complexity}: \\[0.2cm]
+For any integer $m\geq 1$, let $G$ be a family of functions mapping from $Z$ to $[a,b]$ and $S=(z_1,\dots,z_m)$ a fixed sample of size $m$ with elements in $Z$. The Rademacher complexity of $G$ is defined as:
+\[\mathfrak{R}_m(G)=\underset{S \sim D^m}{\text{E}}[\mathfrak{\widehat{R}}_S(G)]\]
+\textbf{Generalization bound for binary classification using Rademacher complexity}:\\[0.2cm]
+Let $H$ be a family of functions taking values in $\{-1,+1\}$. Let $D$ be the distribution over the input space $\mathcal{X}$. For any $\delta > 0$, with probability at least $1-\delta$ over a sample $S$ of size $m$ drawn according to $D$, each of the following holds for any $h \in H$:
+\[R(h)\leq \widehat{R}(h) + \mathfrak{R}_m(H) + \sqrt{\frac{\mathrm{log}\frac{1}{\delta}}{2m}}\]
+\[R(h)\leq \widehat{R}(h) + \mathfrak{\widehat{R}}_S(H) + 3\sqrt{\frac{\mathrm{log}\frac{2}{\delta}}{2m}}\]
+Proof: (later)
+\subsection{VC-Dimension}
+In some cases, computing $\mathfrak{\widehat{R}}_S(H)$ is computationally hard. VC-Dimension is introduced as an alternative. \\[0.2cm]
+\textbf{Definition}
+\textbf{Example: Hyperplanes}
+\textbf{Generalization bound for binary classification using VC-Dimension}
+\section{Support Vector Machines}
+\subsection{Formulation}
+\subsection{Margin Theory}
+bla
+\section{Distance Weighted Discrimination}
+\subsection{Formulation}
+\subsection{Weighted DWD}
+www
+
+\section{References}
+[1] Vapnik 1984 \\[0.2cm]
+[2] Mohri et.al. 2012
+\end{document}
+% ----------------------------------------------------------------

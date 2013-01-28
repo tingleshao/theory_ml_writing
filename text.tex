@@ -91,6 +91,8 @@ The VC-dimension of a hypothesis set $H$ is the size of the largest set that can
 \[VCdim(H) = max\{m:\Pi_H(m) = 2^m\}\]
 \textbf{Example: Hyperplanes}
 \textbf{Generalization bound for binary classification using VC-Dimension}
+Let $H$ be a family of functions taking values in $\{-1,+1\}$ with VC-dimension d. Then for any $\delta > 0$, with probability at least $1-\delta$, the following holds for all $h \in H$: 
+\[R(h) \leq \widehat{R}(h) + \sqrt{\frac{2d\mathrm{log}\frac{em}{d}}{m}} + \sqrt{\frac{\mathrm{log}\frac{1}{\delta}}{2m}}\]
 \section{Support Vector Machines}
 \subsection{Formulation}
 \subsection{Margin Theory}

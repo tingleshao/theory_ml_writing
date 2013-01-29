@@ -29,7 +29,7 @@
 \maketitle
 % ----------------------------------------------------------------
 \section{Introduction}
-Probably Approximate Correct (PAC) learning framework is a useful tool in examining the performance of a learning algorithm with respect to the sample, time and space complexity. It builds the theoretical foundation of the area of machine learning. Tools like Radmacher complexity and VC-dimension are used in order to present the generalization bound of a learning algorithm in some cases. In previous work, the generalization bound for Support Vector Machines (SVM) are successfully derived. In this paper, the author is trying to derive a generalization bound for a different binary classification learning algorithm: Distance Weighted Discrimination (DWD).
+Probably Approximate Correct (PAC) learning framework is a useful tool in examining the performance of a learning algorithm with respect to the sample, time and space complexity. It builds the theoretical foundation of the area of machine learning. Tools like Radmacher complexity and VC-dimension are used in order to present the generalization bound of a learning algorithm in some cases. In previous work, the generalization bound for Support Vector Machines (SVM) are successfully derived. In this paper, the author is trying to derive a generalization bound for a different binary classification learning algorithm: Distance Weighted Discrimination (DWD). The second section sums up the technologies used in proving the generalization bound. The third section gives a example of deriving generalization bound for SVM. The fourth one gives another derivation for DWD.
 \section{PAC Learning Model}
 Probably Approximate Correct (PAC) learning framework was introduced by Valiant [1], to help define the class of learnable concepts in terms of sample complexity, time complexity and space complexity of a learning algorithm [2]. In the previous definition of PAC-learning, sample complexity is related to the number of training sample points needed to achieve an approximate solution.
 \subsection{Definitions}
@@ -64,11 +64,12 @@ A concept class $C$ is said to be PAC-learnable if there exists an algorithm $\m
 \[\underset{S \sim D^m}{\text{Pr}}[R(h_S) \leq \epsilon ] \geq 1 - \delta \]
 Note that PAC does not make assumption on the distribution D. For an algorithm, the concept class $C$ is determined but a particular concept $c$ is unknown. \\[0.2cm]
 (It can be shown that this inequality can be used to bound generalization error)
-\subsection{Example}
+\subsection{Example (later)}
 1. finite H, consistent case \\[0.2cm]
 can get a inequality for $R(h)$\\[0.2cm]
 2. finite H, inconsistent case \\[0.2cm]
-can get a inequality for $R(h)$
+can get a inequality for $R(h)$ \\[0.2cm]
+Link to the idea of Occam's razor principle (later)
 \subsection{Rademacher Complexity}
 Rademacher Complexity: \\[0.2cm]
 In order to produce generalization bound for infinite hypothesis sets, (for example, lines in 2D plane), some tools are required. One is Rademacher Complexity. \\[0.2cm]
@@ -92,10 +93,20 @@ The VC-dimension of a hypothesis set $H$ is the size of the largest set that can
 \[VCdim(H) = max\{m:\Pi_H(m) = 2^m\}\]
 \textbf{Example: Hyperplanes}
 \textbf{Generalization bound for binary classification using VC-Dimension}
-Let $H$ be a family of functions taking values in $\{-1,+1\}$ with VC-dimension d. Then for any $\delta > 0$, with probability at least $1-\delta$, the following holds for all $h \in H$: 
+Let $H$ be a family of functions taking values in $\{-1,+1\}$ with VC-dimension d. Then for any $\delta > 0$, with probability at least $1-\delta$, the following holds for all $h \in H$:
 \[R(h) \leq \widehat{R}(h) + \sqrt{\frac{2d\mathrm{log}\frac{em}{d}}{m}} + \sqrt{\frac{\mathrm{log}\frac{1}{\delta}}{2m}}\]
+Proof: (later) 
 \section{Support Vector Machines}
+Support Vector Machines (SVM) is a widely used tool for binary classification, invented by Vapnik. The SVM algorithm for general non-separable case was introduced by Cortes and Vapnik [3].  
 \subsection{Formulation}
+For SVM algorithm, the hypothesis set is the set of hyperplanes.
+\[H = \{x\mapsto \mathrm{sign}(\mathbf{w\cdot x}+b): \mathbf{w} \in \mathbb{R}^N, b \in \mathbb{R} \}\] 
+For a linearly separable data set, the goal is to find a hyperplane that successfully separate two group of points with labels $\{-1,+1\}$that, points with the same label will be on the same side of hte separating hyperplane. Here is the corresponding primal optimization problem: 
+\[\underset{\mathbf{w}, b}{\mathrm{min}} \frac{1}{2}\|\mathbf{w}\|^2\]
+\[\text{subject to: } y_i(\mathbf{w\cdot x_i}+b) \geq 1, \forall i \in [1,m]\] 
+Note that in the problem we can scale $\mathbf{w}$ and $b$ to make $\underset{(x,y)\in S}{\mathrm{min}}|\mathbf{w\cdot x}+b| =1 $.
+For this problem, we can write the Lagrangian:
+\[\mathcal{L}(\mathbf{w},b,\mathbf{\alpha})=\frac{1}{2}\|\mathbf{w}\|^2-\sum_{i=1}^{m}\alpha_i [y_i(\mathbf{w\cdot x_i}+b)-1]\]
 \subsection{Margin Theory}
 bla
 \section{Distance Weighted Discrimination}
@@ -105,6 +116,7 @@ www
 
 \section{References}
 [1] Vapnik 1984 \\[0.2cm]
-[2] Mohri et.al. 2012
+[2] Mohri et.al. 2012 \\ [0.2cm]
+[3] Cortes, Corinna; and Vapnik, Vladimir N.; "Support-Vector Networks", Machine Learning, 20, 1995.\\ http://www.springerlink.com/content/k238jx04hm87j80g/
 \end{document}
 % ----------------------------------------------------------------

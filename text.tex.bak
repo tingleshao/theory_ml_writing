@@ -29,6 +29,7 @@
 \maketitle
 % ----------------------------------------------------------------
 \section{Introduction}
+Probably Approximate Correct (PAC) learning framework is a useful tool in examining the performance of a learning algorithm with respect to the sample, time and space complexity. It builds the theoretical foundation of the area of machine learning. Tools like Radmacher complexity and VC-dimension are used in order to present the generalization bound of a learning algorithm in some cases. In previous work, the generalization bound for Support Vector Machines (SVM) are successfully derived. In this paper, the author is trying to derive a generalization bound for a different binary classification learning algorithm: Distance Weighted Discrimination (DWD). The second section sums up the technologies used in proving the generalization bound. The third section gives a example of deriving generalization bound for SVM. The fourth one gives another derivation for DWD.
 \section{PAC Learning Model}
 Probably Approximate Correct (PAC) learning framework was introduced by Valiant [1], to help define the class of learnable concepts in terms of sample complexity, time complexity and space complexity of a learning algorithm [2]. In the previous definition of PAC-learning, sample complexity is related to the number of training sample points needed to achieve an approximate solution.
 \subsection{Definitions}
@@ -91,7 +92,7 @@ The VC-dimension of a hypothesis set $H$ is the size of the largest set that can
 \[VCdim(H) = max\{m:\Pi_H(m) = 2^m\}\]
 \textbf{Example: Hyperplanes}
 \textbf{Generalization bound for binary classification using VC-Dimension}
-Let $H$ be a family of functions taking values in $\{-1,+1\}$ with VC-dimension d. Then for any $\delta > 0$, with probability at least $1-\delta$, the following holds for all $h \in H$: 
+Let $H$ be a family of functions taking values in $\{-1,+1\}$ with VC-dimension d. Then for any $\delta > 0$, with probability at least $1-\delta$, the following holds for all $h \in H$:
 \[R(h) \leq \widehat{R}(h) + \sqrt{\frac{2d\mathrm{log}\frac{em}{d}}{m}} + \sqrt{\frac{\mathrm{log}\frac{1}{\delta}}{2m}}\]
 \section{Support Vector Machines}
 \subsection{Formulation}

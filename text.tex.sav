@@ -97,8 +97,17 @@ Let $H$ be a family of functions taking values in $\{-1,+1\}$ with VC-dimension 
 \[R(h) \leq \widehat{R}(h) + \sqrt{\frac{2d\mathrm{log}\frac{em}{d}}{m}} + \sqrt{\frac{\mathrm{log}\frac{1}{\delta}}{2m}}\]
 Proof: (later) 
 \section{Support Vector Machines}
-Support Vector Machines (SVM) is a widely used tool for binary classification. 
+Support Vector Machines (SVM) is a widely used tool for binary classification, invented by Vapnik. The SVM algorithm for general non-separable case was introduced by Cortes and Vapnik [3].  
 \subsection{Formulation}
+For SVM algorithm, the hypothesis set is the set of hyperplanes.
+\[H = \{x\mapsto \mathrm{sign}(\mathbf{w\cdot x}+b): \mathbf{w} \in \mathbb{R}^N, b \in \mathbb{R} \}\] 
+For a linearly separable data set, the goal is to find a hyperplane that successfully separate two group of points with labels $\{-1,+1\}$that, points with the same label will be on the same side of hte separating hyperplane. Here is the corresponding primal optimization problem: 
+\[\underset{\mathbf{w}, b}{\mathrm{min}} \frac{1}{2}\|\mathbf{w}\|^2\]
+\[\text{subject to: } y_i(\mathbf{w\cdot x_i}+b) \geq 1, \forall i \in [1,m]\] 
+Note that in the problem we can scale $\mathbf{w}$ and $b$ to make $\underset{(x,y)\in S}{\mathrm{min}}|\mathbf{w\cdot x}+b| =1 $.
+For this problem, we can write the Lagrangian:
+\[\mathcal{L}(\mathbf{w},b,\mathbf{\alpha})=\frac{1}{2}\|\mathbf{w}\|^2-\sum_{i=1}^{m}\alpha_i [y_i(\mathbf{w\cdot x_i}+b)-1]\]
+
 \subsection{Margin Theory}
 bla
 \section{Distance Weighted Discrimination}
@@ -108,6 +117,7 @@ www
 
 \section{References}
 [1] Vapnik 1984 \\[0.2cm]
-[2] Mohri et.al. 2012
+[2] Mohri et.al. 2012 \\ [0.2cm]
+[3] Cortes, Corinna; and Vapnik, Vladimir N.; "Support-Vector Networks", Machine Learning, 20, 1995.\\ http://www.springerlink.com/content/k238jx04hm87j80g/
 \end{document}
 % ----------------------------------------------------------------

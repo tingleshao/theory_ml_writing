@@ -105,8 +105,14 @@ For a linearly separable data set, the goal is to find a hyperplane that success
 \[\underset{\mathbf{w}, b}{\mathrm{min}} \frac{1}{2}\|\mathbf{w}\|^2\]
 \[\text{subject to: } y_i(\mathbf{w\cdot x_i}+b) \geq 1, \forall i \in [1,m]\] 
 Note that in the problem we can scale $\mathbf{w}$ and $b$ to make $\underset{(x,y)\in S}{\mathrm{min}}|\mathbf{w\cdot x}+b| =1 $.
+The objective function is quadratic and the constraint is affine. This problem belongs to quadratic programming (QP). \\[0.2cm]
+\textbf{Lagrangian and KKT condition and dual form: (later)} \\[0.2cm]
 For this problem, we can write the Lagrangian:
 \[\mathcal{L}(\mathbf{w},b,\mathbf{\alpha})=\frac{1}{2}\|\mathbf{w}\|^2-\sum_{i=1}^{m}\alpha_i [y_i(\mathbf{w\cdot x_i}+b)-1]\]
+\subsection{Leave-one-out error}
+\textbf{Definition} \\[0.2cm]
+Leave-one-out error can be understood as: having a set $S$ of training examples with size $m$, every time we take one training example $x_i$ out, train the classifier using the remaining data with the training algorithm $\mathcal{A}$, then use $x_i$ to test the SVM. We do it $m$ times and calculate error on average. 
+\[\widehat{R}_{LOO}(\mathcal{A})=\frac{1}{m}\sum_{i=1}^{m}1_{h_{S-\{x_i\}}(x_i)\neq y_i}\] 
 \subsection{Margin Theory}
 bla
 \section{Distance Weighted Discrimination}

@@ -64,11 +64,12 @@ A concept class $C$ is said to be PAC-learnable if there exists an algorithm $\m
 \[\underset{S \sim D^m}{\text{Pr}}[R(h_S) \leq \epsilon ] \geq 1 - \delta \]
 Note that PAC does not make assumption on the distribution D. For an algorithm, the concept class $C$ is determined but a particular concept $c$ is unknown. \\[0.2cm]
 (It can be shown that this inequality can be used to bound generalization error)
-\subsection{Example}
+\subsection{Example (later)}
 1. finite H, consistent case \\[0.2cm]
 can get a inequality for $R(h)$\\[0.2cm]
 2. finite H, inconsistent case \\[0.2cm]
-can get a inequality for $R(h)$
+can get a inequality for $R(h)$ \\[0.2cm]
+Link to the idea of Occam's razor principle (later)
 \subsection{Rademacher Complexity}
 Rademacher Complexity: \\[0.2cm]
 In order to produce generalization bound for infinite hypothesis sets, (for example, lines in 2D plane), some tools are required. One is Rademacher Complexity. \\[0.2cm]
@@ -94,17 +95,41 @@ The VC-dimension of a hypothesis set $H$ is the size of the largest set that can
 \textbf{Generalization bound for binary classification using VC-Dimension}
 Let $H$ be a family of functions taking values in $\{-1,+1\}$ with VC-dimension d. Then for any $\delta > 0$, with probability at least $1-\delta$, the following holds for all $h \in H$:
 \[R(h) \leq \widehat{R}(h) + \sqrt{\frac{2d\mathrm{log}\frac{em}{d}}{m}} + \sqrt{\frac{\mathrm{log}\frac{1}{\delta}}{2m}}\]
+Proof: (later)
 \section{Support Vector Machines}
+Support Vector Machines (SVM) is a widely used tool for binary classification, invented by Vapnik. The SVM algorithm for general non-separable case was introduced by Cortes and Vapnik [3].
 \subsection{Formulation}
+For SVM algorithm, the hypothesis set is the set of hyperplanes.
+\[H = \{x\mapsto \mathrm{sign}(\mathbf{w\cdot x}+b): \mathbf{w} \in \mathbb{R}^N, b \in \mathbb{R} \}\]
+For a linearly separable data set, the goal is to find a hyperplane that successfully separate two group of points with labels $\{-1,+1\}$that, points with the same label will be on the same side of hte separating hyperplane. Here is the corresponding primal optimization problem:
+\[\underset{\mathbf{w}, b}{\mathrm{min}} \frac{1}{2}\|\mathbf{w}\|^2\]
+\[\text{subject to: } y_i(\mathbf{w\cdot x_i}+b) \geq 1, \forall i \in [1,m]\]
+Note that in the problem we can scale $\mathbf{w}$ and $b$ to make $\underset{(x,y)\in S}{\mathrm{min}}|\mathbf{w\cdot x}+b| =1 $.
+The objective function is quadratic and the constraint is affine. This problem belongs to quadratic programming (QP). \\[0.2cm]
+\textbf{Lagrangian and KKT condition and dual form: (later)} \\[0.2cm]
+For this problem, we can write the Lagrangian:
+\[\mathcal{L}(\mathbf{w},b,\mathbf{\alpha})=\frac{1}{2}\|\mathbf{w}\|^2-\sum_{i=1}^{m}\alpha_i [y_i(\mathbf{w\cdot x_i}+b)-1]\]
+\subsection{Leave-one-out error}
+\textbf{Definition} \\[0.2cm]
+Leave-one-out error can be understood as: having a set $S$ of training examples with size $m$, every time we take one training example $x_i$ out, train the classifier using the remaining data with the training algorithm $\mathcal{A}$, then use $x_i$ to test the SVM. We do it $m$ times and calculate error on average.
+\[\widehat{R}_{LOO}(\mathcal{A})=\frac{1}{m}\sum_{i=1}^{m}1_{h_{S-\{x_i\}}(x_i)\neq y_i}\]
+\subsection{Soft Margin SVM Formulation}
+(later)
 \subsection{Margin Theory}
-bla
+(later)
+\subsection{Generalization Bound}
 \section{Distance Weighted Discrimination}
+Distance Weighted Discrimination (DWD) is another binary classification method introduced by Merron, Todd and Ahn [4]. DWD was designed for high dimension, low sample size (HDLSS) senecios, in which SVM method suffers from "data piling". \\[0.2cm]
+In HDLSS context, data piling is a problem that, after projecting data points on the line normal to the separating hyperplane, the data points tends to group together at the regions close to the positive and negative margins. Data piling implies the loss of generalizability. From the learning bound point of view, the data piling effect means the number of support vectors is large, which implies the bound of the expectation of the generalization error is loose. \\[0.2cm]
+DWD differs from SVM by taking into consideration all the data points in determining the separation hyperplane, rather than only considering points on the margin. Experiments done by Marron et.al. [4] shows that DWD can successfully avoid data piling. The projection of the data points on the direction perpendicular to the separation hyperplane are well separated. 
 \subsection{Formulation}
+
 \subsection{Weighted DWD}
-www
 
 \section{References}
 [1] Vapnik 1984 \\[0.2cm]
-[2] Mohri et.al. 2012
+[2] Mohri et.al. 2012 \\ [0.2cm]
+[3] Cortes, Corinna; and Vapnik, Vladimir N.; "Support-Vector Networks", Machine Learning, 20, 1995.\\ http://www.springerlink.com/content/k238jx04hm87j80g/ \\[0.2cm]
+[4] Merron, Todd and Ahn, DWD paper
 \end{document}
 % ----------------------------------------------------------------

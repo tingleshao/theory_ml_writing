@@ -109,7 +109,7 @@ The objective function is quadratic and the constraint is affine. This problem b
 \textbf{Lagrangian and KKT condition and dual form: (later)} \\[0.2cm]
 For this problem, we can write the Lagrangian:
 \[\mathcal{L}(\mathbf{w},b,\mathbf{\alpha})=\frac{1}{2}\|\mathbf{w}\|^2-\sum_{i=1}^{m}\alpha_i [y_i(\mathbf{w\cdot x_i}+b)-1]\]
-The dual form of the optimization problem shows that SVM only considers the support vectors when calculating the hyperplane therefore it needs to be shown. 
+The dual form of the optimization problem shows that SVM only considers the support vectors when calculating the hyperplane therefore it needs to be shown.
 \subsection{Leave-one-out error}
 \textbf{Definition} \\[0.2cm]
 Leave-one-out error can be understood as: having a set $S$ of training examples with size $m$, every time we take one training example $x_i$ out, train the classifier using the remaining data with the training algorithm $\mathcal{A}$, then use $x_i$ to test the SVM. We do it $m$ times and calculate error on average.
@@ -129,9 +129,10 @@ We consider the general case that the data points may not be linear separable. L
 We define the residual $r_i$ of a data point $x_i$:
 \[r_i = y_i(\mathbf{x_i'w}+b+\xi_i)\]
 $\xi_i$ is a scalar for penalizing the misclassified points, like the general case SVM. When the data point is correctly classified and the penalization is not too small, $\xi_i = 0$. \\[0.2cm]
-The optimization problem for DWD is: 
+The optimization problem for DWD is:
 \[\underset{\mathbf{r,w,}\beta,\mathbf{\xi}}{\mathrm{min}}\sum_i \frac{1}{r_i} + Ce'\xi\]
-\[\text{subject to: }\mathbf{r} = \mathbf{YX'w} + \beta\mathbf{y} + \mathbf{\xi} \geq 0, \|\mathbf{w}\|^2 \leq 1, \xi \geq 0\]
+\[\text{subject to: }\mathbf{r} = \mathbf{YX'w} + \beta\mathbf{y} + \boldsymbol{\xi} \geq 0, \|\mathbf{w}\|^2 \leq 1, \xi \geq 0\]
+Where $\mathbf{r}$ is the vector contains $r$ values. $\mathbf{Y}$ is $n$ by $n$ diagonal matrix with diagonal elements $y_i$ the labels of training data. $\mathbf{X}$ is the sample data matrix and $\boldsymbol{\xi}$ is the vector contains $\xi$ values.
 \subsection{Weighted DWD}
 
 \section{References}

@@ -74,6 +74,22 @@ Finite $H$ means that the number of possible returned hypothesis $h$ is finite. 
 \[m \geq \frac{1}{\epsilon}(log|H|+log\frac{1}{\delta})\] \\[0.2cm]
 Then we can get a inequality for $R(h)$
 \[R(h_S) \leq \frac{1}{m}(log|H| + log\frac{1}{\delta})\]
+\textbf{Proof:}\\[0.2cm]
+We think that having a fixed $\epsilon$, the probability of having a consistent hypothesis $h_S$ that has error larger than $\epsilon$:
+\[\text{Pr}[\exists h \in H: \widehat{R}(h) > 0  \wedge R(h) > \epsilon]\]
+\[= \text{Pr}[(h_1 \in H, \widehat{R}(h_1)=0 \wedge R(h_1) \geq \epsilon) \vee (h_2 \in H, \widehat{R}(h_2) = 0 \wedge R(h_2) > \epsilon) \vee \dots]\]
+\[\leq \sum_{h\in H}\text{Pr}[\widehat{R}(h) = 0 \wedge R(h)> \epsilon]\]
+\[\leq \sum_{h\in H}\text{Pr}[\widehat{R}(h) = 0 | R(h)> \epsilon]\]
+for any $h$ with $R(h) > \epsilon$, the probability having $\widehat{R}(h) = 0$ is bounded by:
+\[\text{Pr}[\widehat{R}(h)=0| R(h)>\epsilon] \leq (1-\epsilon)^m\] 
+Apply this inequality to the previous inequality and consider the finite hypothesis family $H$:
+\[\text{Pr}[\exists h \in H: \widehat{R}(h) = 0 \wedge R(h) > \epsilon] \leq |H|(1-\epsilon)^m \leq |H|e^{-m\epsilon}\]
+\[\text{Pr}[R(h_S) \leq \epsilon] \geq 1 - |H|e^{-m\epsilon} \geq 1 - \delta  \]
+\[\delta \geq |H|e^{-m\epsilon}\]
+\[1 \geq \frac{|H|}{\delta}e^{-m\epsilon}\]
+\[m\epsilon\ \geq log|H| + log\frac{1}{\delta}\]
+\[m \geq \frac{1}{\epsilon} ( log|H| + log\frac{1}{\delta})\]
+\[\text{Q.E.D.}\]\\[0.2cm]
 2. finite H, inconsistent case (later) \\[0.2cm]
 can get a inequality for $R(h)$ \\[0.2cm]
 \textbf{Link to the idea of Occam's razor principle} (later)\\[0.2cm]
@@ -115,7 +131,7 @@ For a linearly separable data set, the goal is to find a hyperplane that success
 \[\underset{\mathbf{w}, b}{\mathrm{min}} \frac{1}{2}\|\mathbf{w}\|^2\]
 \[\text{subject to: } y_i(\mathbf{w\cdot x_i}+b) \geq 1, \forall i \in [1,m]\]
 Note that in the problem we can scale $\mathbf{w}$ and $b$ to make $\underset{(x,y)\in S}{\mathrm{min}}|\mathbf{w\cdot x}+b| =1 $.
-The objective function is quadratic and the constraint is affine. This problem belongs to quadratic programming (QP). \\[0.2cm]
+The objective function is quadratic and the constraint is affine. This problem belongs to quadratic programming (QP). It can be solved efficiently using many available optimization software. \\[0.2cm]
 \textbf{Lagrangian and KKT condition and dual form: (later)} \\[0.2cm]
 For this problem, we can write the Lagrangian:
 \[\mathcal{L}(\mathbf{w},b,\mathbf{\alpha})=\frac{1}{2}\|\mathbf{w}\|^2-\sum_{i=1}^{m}\alpha_i [y_i(\mathbf{w\cdot x_i}+b)-1]\]

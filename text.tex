@@ -29,7 +29,7 @@
 \maketitle
 % ----------------------------------------------------------------
 \section{Introduction}
-Probably Approximate Correct (PAC) learning framework is a useful tool in examining the performance of a learning algorithm with respect to the sample, time and space complexity. It builds the theoretical foundation of the area of machine learning. Tools like Radmacher complexity and VC-dimension are used in order to present the generalization bound of a learning algorithm in some cases. In previous work, the generalization bound for Support Vector Machines (SVM) are successfully derived. In this paper, the author is trying to derive a generalization bound for a different binary classification learning algorithm: Distance Weighted Discrimination (DWD). The second section sums up the technologies used in proving the generalization bound. The third section gives a example of deriving generalization bound for SVM. The fourth one gives another derivation for DWD.
+Probably Approximate Correct (PAC) learning framework is a useful tool in examining the performance of a learning algorithm with respect to the sample, time and space complexity. It builds the theoretical foundation of the area of machine learning. Tools like Radmacher complexity and VC-dimension are used in order to present the generalization bound of a learning algorithm in some cases. In previous work, people have derived the generalization bound for Support Vector Machines (SVM). In this paper, the idea of PAC framework and the derivation of SVM's generalization bound are presented. The possibility of the derivation of a generalization bound for another learning algorithm which is designed for high dimensional, low sample size scenario: Distance Weighted Discrimination (DWD) is discussed.
 \section{PAC Learning Model}
 Probably Approximate Correct (PAC) learning framework was introduced by Valiant [1], to help define the class of learnable concepts in terms of sample complexity, time complexity and space complexity of a learning algorithm [2]. In the previous definition of PAC-learning, sample complexity is related to the number of training sample points needed to achieve an approximate solution.
 \subsection{Definitions}
@@ -114,15 +114,15 @@ The dual form of the optimization problem shows that SVM only considers the supp
 \textbf{Definition} \\[0.2cm]
 Leave-one-out error can be understood as: having a set $S$ of training examples with size $m$, every time we take one training example $x_i$ out, train the classifier using the remaining data with the training algorithm $\mathcal{A}$, then use $x_i$ to test the SVM. We do it $m$ times and calculate error on average.
 \[\widehat{R}_{LOO}(\mathcal{A})=\frac{1}{m}\sum_{i=1}^{m}1_{h_{S-\{x_i\}}(x_i)\neq y_i}\]
-It can be proved that the expectation of leave-one-out error for training data size $m\geq 2$ equals to the expectation of generalization bound, for SVM with training data size $m-1$. This gives the information of the generalization bound of SVM algorithm in terms of average but not any suggestions on variance. 
+It can be proved that the expectation of leave-one-out error for training data size $m\geq 2$ equals to the expectation of generalization bound, for SVM with training data size $m-1$. This gives the information of the generalization bound of SVM algorithm in terms of average but not any suggestions on variance.
 \[\underset{S\sim D^m}{\mathrm{E}}[\widehat{R}_{LOO}(\mathcal{A})]=\underset{S'\sim D^{m-1}}{\mathrm{E}}[R'(h_{S'})]\]
 Proof:
 \begin{align*}
 \underset{S\sim D^m}{\mathrm{E}} [\widehat{R}_{LOO}(\mathcal{A})]  &= \frac{1}{m} \sum_{i=1}^m \underset{S \sim D^m}{\mathrm{E}}[1_{h_{S-\{x_i\}}(x_i)\neq y_i}] \\
                                                                    &= \underset{S \sim D^m}{\mathrm{E}}[1_{h_{S-\{x_i\}}(x_1)\neq y_1}] \\
-                                                                   &= \underset{S' \sim D^{m-1}, x_1 \sim D}{\mathrm{E}}[1_{h_{S'}(x_1)\neq y_1}] \\ 
-                                                                   &= \underset{S' \sim D^{m-1}}{\mathrm{E}}[\underset{x_1 \sim D}{\mathrm{E}}[1_{h_{S'}(x_1)\neq y_1}]] \\ 
-                                                                   &= \underset{S' \sim D^{m-1}}{\mathrm{E}}[R(h_{S'})] \\ 
+                                                                   &= \underset{S' \sim D^{m-1}, x_1 \sim D}{\mathrm{E}}[1_{h_{S'}(x_1)\neq y_1}] \\
+                                                                   &= \underset{S' \sim D^{m-1}}{\mathrm{E}}[\underset{x_1 \sim D}{\mathrm{E}}[1_{h_{S'}(x_1)\neq y_1}]] \\
+                                                                   &= \underset{S' \sim D^{m-1}}{\mathrm{E}}[R(h_{S'})] \\
 \end{align*}
 \subsection{Soft Margin SVM Formulation}
 (later)

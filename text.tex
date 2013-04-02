@@ -15,9 +15,12 @@
 \theoremstyle{remark}
 \newtheorem{rem}[thm]{Remark}
 \usepackage{amssymb}
+\usepackage{setspace}
 \numberwithin{equation}{section}
+\doublespacing
 % ----------------------------------------------------------------
 \begin{document}
+
 
 \title{The Derivation of Generalization Bounds for Distance Weighted Discrimination}%
 \author{Chong Shao}%
@@ -64,10 +67,14 @@ A concept class $C$ is said to be PAC-learnable if there exists an algorithm $\m
 \[\underset{S \sim D^m}{\text{Pr}}[R(h_S) \leq \epsilon ] \geq 1 - \delta \]
 Note that PAC does not make assumption on the distribution D. For an algorithm, the concept class $C$ is determined (for example, all possible binary codes in a given length, or a straight line in 2D space) but a particular concept $c$ is unknown. \\[0.2cm]
 (It can be shown that this inequality can be used to bound generalization error)
-\subsection{Example (later)}
-1. finite H, consistent case \\[0.2cm]
-can get a inequality for $R(h)$\\[0.2cm]
-2. finite H, inconsistent case \\[0.2cm]
+\subsection{Examples}
+1. Finite $H$, consistent case \\[0.2cm]
+Finite $H$ means that the number of possible returned hypothesis $h$ is finite. Consistent means the returned hypothesis makes no error on the training data sample $S$.\\[0.2cm]
+[2] Let $H$ be a finite set of functions mapping from $\mathcal{X}$ to $\mathcal{Y}$. Let $\mathcal{A}$ be an algorithm that for any target concept $c \in H$ and \emph{i.i.d.} sample $S$ returns a consistent hypothesis $h_{S}$: $\widehat{R}(h_S) = 0$. Then, for any $\epsilon, \delta > 0$, the inequality $\text{Pr}_{S \sim D^m}[R(h_S) \leq \epsilon] \geq 1-\delta$ holds if
+\[m \geq \frac{1}{\epsilon}(log|H|+log\frac{1}{\delta})\] \\[0.2cm]
+Then we can get a inequality for $R(h)$
+\[R(h_S) \leq \frac{1}{m}(log|H| + log\frac{1}{\delta})\]
+2. finite H, inconsistent case (later) \\[0.2cm]
 can get a inequality for $R(h)$ \\[0.2cm]
 \textbf{Link to the idea of Occam's razor principle} (later)\\[0.2cm]
 The basic idea of introducing Occam's razor principle is that, for two learning algorithms that performs equally well in terms of empirical error on a given data, the one with less complexity is preferred. For example, the one which generates a linear separating hyperplane is preferred in stead of the one which yields an nonlinear separating boundary. This can be shown in the next section, by examing the inequality (generalization bound) using Rademacher complexity, for a learning algorithm with function family with smaller Rademacher complexity, the bound is tighter.
@@ -87,13 +94,15 @@ Let $H$ be a family of functions taking values in $\{-1,+1\}$. Let $D$ be the di
 \[R(h)\leq \widehat{R}(h) + \mathfrak{R}_m(H) + \sqrt{\frac{\mathrm{log}\frac{1}{\delta}}{2m}}\]
 \[R(h)\leq \widehat{R}(h) + \mathfrak{\widehat{R}}_S(H) + 3\sqrt{\frac{\mathrm{log}\frac{2}{\delta}}{2m}}\]
 Proof: (later)
-\subsection{VC-Dimension}
-In some cases, computing $\mathfrak{\widehat{R}}_S(H)$ is computationally hard. VC-Dimension is introduced as an alternative. \\[0.2cm]
-\textbf{Definition}
+\subsection{Growth Function}
+(Growth function is another measure of the complexity of a learning algorithm. This can be also explained for the sake of complete.)
+\subsection{VC-dimension}
+In many cases, obtaining $\mathfrak{\widehat{R}}_S(H)$ (Rademacher complexity) is computationally hard. Computing growth function is hard also. VC-dimension is introduced as an alternative. VC-dimension stands for Vapnik-Chervonenkis dimension.\\[0.2cm]
+\textbf{Definition:}\\[0.2cm]
 The VC-dimension of a hypothesis set $H$ is the size of the largest set that can be fully shattered by $H$:
 \[VCdim(H) = max\{m:\Pi_H(m) = 2^m\}\]
-\textbf{Example: Hyperplanes}
-\textbf{Generalization bound for binary classification using VC-Dimension}
+\textbf{Example of shattering: Hyperplanes}\\[0.2cm]
+\textbf{Generalization bound for binary classification using VC-Dimension}\\[0.2cm]
 Let $H$ be a family of functions taking values in $\{-1,+1\}$ with VC-dimension d. Then for any $\delta > 0$, with probability at least $1-\delta$, the following holds for all $h \in H$:
 \[R(h) \leq \widehat{R}(h) + \sqrt{\frac{2d\mathrm{log}\frac{em}{d}}{m}} + \sqrt{\frac{\mathrm{log}\frac{1}{\delta}}{2m}}\]
 Proof: (later)
@@ -152,7 +161,7 @@ Weighted DWD [5] can be intuitively thought as a learning algorithm lying on the
 [1] Vapnik 1984 \\[0.2cm]
 [2] Mohri et.al., \emph{``Foundations of Machine Learning"}, 2012 \\ [0.2cm]
 [3] Cortes, Corinna; and Vapnik, Vladimir N.; \emph{``Support-Vector Networks"}, Machine Learning, 20, 1995.\\ http://www.springerlink.com/content/k238jx04hm87j80g/ \\[0.2cm]
-[4] Merron, Todd and Ahn. DWD paper \\[0.2cm]
+[4] Merron, Todd and Ahn, DWD paper \\[0.2cm]
 [5] Marron et.al., Weighted DWD paper
 \end{document}
 % ----------------------------------------------------------------

@@ -90,13 +90,27 @@ Apply this inequality to the previous inequality and consider the finite hypothe
 \[m\epsilon\ \geq log|H| + log\frac{1}{\delta}\]
 \[m \geq \frac{1}{\epsilon} ( log|H| + log\frac{1}{\delta})\]
 \[\text{Q.E.D.}\]\\[0.2cm]
-This just shows that a concept is learnable, and it is related to the size of hypothesis set, the degree of confidence the learner requires and the size of training examples. For this particular example, it shows that every consistent learning algorithm with finite size hypothesis set is PAC-learnable.\\[0.2cm]
+This shows that if a concept is learnable, it is related to the size of hypothesis set, the degree of confidence the learner requires and the size of training examples. For this particular example, it shows that every consistent learning algorithm with finite size hypothesis set is PAC-learnable.\\[0.2cm]
 2. Finite H, inconsistent case\\[0.2cm]
-If it is in the case that there is no way to get a hypothesis with no error on the training data, it is called inconsistent case. For this situation, the inequality should contain the term $\widehat{R}(h)$. The inequality is called \textbf{generalization bound}.\\[0.2cm]
-Let H be a finite hypothesis set, Then for any $\delta > 0$, with probability at least $1-\delta$. the following inequality holds:
+If it is in the case that there is no way to get a hypothesis with no error on the training data, it is called inconsistent case. For this situation, we want the actual error close to the empirical error. The inequality should contain the term $\widehat{R}(h)$. The inequality is called \textbf{generalization bound}.\\[0.2cm]
+Hoeffding's inequality says:\\[0.2cm]
+Let $X_1,\dots X_m$ be independent random variables with $X_i$ taking values in $[a_i,b_i]$ for all $i\in[1,m]$. Then for any $\epsilon > 0$, the following inequalities hold for $S_m = sum_{i=1}^m X_i:$
+\[\text{Pr}[S_m-\text{E}[S_m] \geq \epsilon] \leq e^{-2\epsilon^2 / \sum_{i=1}^m(b_i-a_i)^2}\]
+\[\text{Pr}[S_m-\text{E}[S_m] \leq -\epsilon] \leq e^{-2\epsilon^2 / \sum_{i=1}^m(b_i-a_i)^2}\]
+This inequality can be used in this way:\\[0.2cm]
+Fix $\epsilon >0$ and let $S$ denote an \emph{i.i.d.} sample of size $m$. For any hypothesis $h$, the following inequalities hold:
+\[\text{Pr}_{S\sim D^m}[\widehat{R}(h) - R(h) \geq \epsilon] \leq e^{-2m\epsilon^2}\]
+\[\text{Pr}_{S\sim D^m}[\widehat{R}(h) - R(h) \leq -\epsilon] \leq e^{-2m\epsilon^2}\]
+Then we have
+\[\text{Pr}_{S\sim D^m}[|\widehat{R}(h) - R(h)| \geq \epsilon] \leq 2 e^{-2m\epsilon^2}\]
+Then the following generalization bound inequality holds:\\[0.2cm]
+Let H be a finite hypothesis set, Then for any $\delta > 0$, with probability at least $1-\delta$, the following inequality holds:
 \[\forall h \in H, R(h) \leq \widehat{R}(h) + \sqrt{\frac{log|H|+log\frac{2}{\delta}}{2m}}\]
-
-\textbf{Link to the idea of Occam's razor principle} (later)\\[0.2cm]
+\textbf{Proof:}
+\[\text{Pr}[\exists h \in H | |\widehat{R}(h) - R(h)|>\epsilon] = \text{Pr}[(|\widehat{R}(h_1)-R(h_1)| > \epsilon)\vee \dots \vee (|\widehat{R}(h_m)-R(h_m)| > \epsilon)]\]
+\[\leq \sum_{h\in H}\text{Pr}[|\widehat{R}(h)-R(h)|> \epsilon]\]
+\[\leq 2|H|e^{-2m\epsilon^2}\]
+\textbf{Link to the idea of Occam's razor principle}\\[0.2cm]
 The basic idea of introducing Occam's razor principle is that, for two learning algorithms that performs equally well in terms of empirical error on a given data, the one with less complexity is preferred. For example, the one which generates a linear separating hyperplane is preferred in stead of the one which yields an nonlinear separating boundary. This can be shown in the next section, by examing the inequality (generalization bound) using Rademacher complexity, for a learning algorithm with function family with smaller Rademacher complexity, the bound is tighter.
 \subsection{Rademacher Complexity}
 Rademacher Complexity: \\[0.2cm]

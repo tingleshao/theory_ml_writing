@@ -69,8 +69,8 @@ Note that PAC does not make assumption on the distribution D. For an algorithm, 
 (It can be shown that this inequality can be used to bound generalization error)
 \subsection{Examples}
 1. Finite $H$, consistent case \\[0.2cm]
-Finite $H$ means that the number of possible returned hypothesis $h$ is finite. Consistent means the returned hypothesis makes no error on the training data sample $S$.\\[0.2cm]
-[2] Let $H$ be a finite set of functions mapping from $\mathcal{X}$ to $\mathcal{Y}$. Let $\mathcal{A}$ be an algorithm that for any target concept $c \in H$ and \emph{i.i.d.} sample $S$ returns a consistent hypothesis $h_{S}$: $\widehat{R}(h_S) = 0$. Then, for any $\epsilon, \delta > 0$, the inequality $\text{Pr}_{S \sim D^m}[R(h_S) \leq \epsilon] \geq 1-\delta$ holds if
+Finite $H$ means that the number of possible returned hypothesis $h$ is finite. Consistent means the returned hypothesis makes no error on the training data sample $S$ [2].\\[0.2cm]
+Let $H$ be a finite set of functions mapping from $\mathcal{X}$ to $\mathcal{Y}$. Let $\mathcal{A}$ be an algorithm that for any target concept $c \in H$ and \emph{i.i.d.} sample $S$ returns a consistent hypothesis $h_{S}$: $\widehat{R}(h_S) = 0$. Then, for any $\epsilon, \delta > 0$, the inequality $\text{Pr}_{S \sim D^m}[R(h_S) \leq \epsilon] \geq 1-\delta$ holds if
 \[m \geq \frac{1}{\epsilon}(log|H|+log\frac{1}{\delta})\] \\[0.2cm]
 Then we can get a inequality for $R(h)$
 \[R(h_S) \leq \frac{1}{m}(log|H| + log\frac{1}{\delta})\]
@@ -90,8 +90,12 @@ Apply this inequality to the previous inequality and consider the finite hypothe
 \[m\epsilon\ \geq log|H| + log\frac{1}{\delta}\]
 \[m \geq \frac{1}{\epsilon} ( log|H| + log\frac{1}{\delta})\]
 \[\text{Q.E.D.}\]\\[0.2cm]
-2. finite H, inconsistent case (later) \\[0.2cm]
-can get a inequality for $R(h)$ \\[0.2cm]
+This just shows that a concept is learnable, and it is related to the size of hypothesis set, the degree of confidence the learner requires and the size of training examples. For this particular example, it shows that every consistent learning algorithm with finite size hypothesis set is PAC-learnable.\\[0.2cm]
+2. Finite H, inconsistent case\\[0.2cm]
+If it is in the case that there is no way to get a hypothesis with no error on the training data, it is called inconsistent case. For this situation, the inequality should contain the term $\widehat{R}(h)$. The inequality is called \textbf{generalization bound}.\\[0.2cm]
+Let H be a finite hypothesis set, Then for any $\delta > 0$, with probability at least $1-\delta$. the following inequality holds:
+\[\forall h \in H, R(h) \leq \widehat{R}(h) + \sqrt{\frac{log|H|+log\frac{2}{\delta}}{2m}}\]
+
 \textbf{Link to the idea of Occam's razor principle} (later)\\[0.2cm]
 The basic idea of introducing Occam's razor principle is that, for two learning algorithms that performs equally well in terms of empirical error on a given data, the one with less complexity is preferred. For example, the one which generates a linear separating hyperplane is preferred in stead of the one which yields an nonlinear separating boundary. This can be shown in the next section, by examing the inequality (generalization bound) using Rademacher complexity, for a learning algorithm with function family with smaller Rademacher complexity, the bound is tighter.
 \subsection{Rademacher Complexity}

@@ -32,7 +32,7 @@
 \maketitle
 % ----------------------------------------------------------------
 \section{Introduction}
-Probably Approximate Correct (PAC) learning framework is a useful tool in examining the performance of a learning algorithm with respect to the sample, time and space complexity. It builds the theoretical foundation of the area of machine learning. Tools like Radmacher complexity and VC-dimension are used in order to present the generalization bound of a learning algorithm in some cases. In previous work, people have derived the generalization bound for Support Vector Machines (SVM). In this paper, the idea of PAC framework and the derivation of SVM's generalization bound are presented. The possibility of the derivation of a generalization bound for another learning algorithm which is designed for high dimensional, low sample size scenario: Distance Weighted Discrimination (DWD) is discussed. 
+Probably Approximate Correct (PAC) learning framework is a useful tool in examining the performance of a learning algorithm with respect to the sample, time and space complexity. It builds the theoretical foundation of the area of machine learning. Tools like Radmacher complexity and VC-dimension are used in order to present the generalization bound of a learning algorithm in some cases. In previous work, people have derived the generalization bound for Support Vector Machines (SVM). In this paper, the idea of PAC framework and the derivation of SVM's generalization bound are presented. The possibility of the derivation of a generalization bound for another learning algorithm which is designed for high dimensional, low sample size scenario: Distance Weighted Discrimination (DWD) is discussed.
 \section{PAC Learning Model}
 Probably Approximate Correct (PAC) learning framework was introduced by Valiant [1], to help define the class of learnable concepts in terms of sample complexity, time complexity and space complexity of a learning algorithm [2]. In the definition of PAC-learning, sample complexity is related to the number of training sample points needed to achieve an approximate solution.
 \subsection{Definitions}
@@ -81,7 +81,7 @@ We think that having a fixed $\epsilon$, the probability of having a consistent 
 \[\leq \sum_{h\in H}\text{Pr}[\widehat{R}(h) = 0 \wedge R(h)> \epsilon]\]
 \[\leq \sum_{h\in H}\text{Pr}[\widehat{R}(h) = 0 | R(h)> \epsilon]\]
 for any $h$ with $R(h) > \epsilon$, the probability having $\widehat{R}(h) = 0$ is bounded by:
-\[\text{Pr}[\widehat{R}(h)=0| R(h)>\epsilon] \leq (1-\epsilon)^m\] 
+\[\text{Pr}[\widehat{R}(h)=0| R(h)>\epsilon] \leq (1-\epsilon)^m\]
 Apply this inequality to the previous inequality and consider the finite hypothesis family $H$:
 \[\text{Pr}[\exists h \in H: \widehat{R}(h) = 0 \wedge R(h) > \epsilon] \leq |H|(1-\epsilon)^m \leq |H|e^{-m\epsilon}\]
 \[\text{Pr}[R(h_S) \leq \epsilon] \geq 1 - |H|e^{-m\epsilon} \geq 1 - \delta  \]
@@ -175,7 +175,7 @@ Proof:
 \subsection{Generalization Bound}
 (later)
 \section{Distance Weighted Discrimination}
-Distance Weighted Discrimination (DWD) is another binary classification method introduced by Merron, Todd and Ahn [4]. DWD was designed for high dimension, low sample size (HDLSS) senecios, in which SVM method suffers from "data piling". \\[0.2cm]
+Distance Weighted Discrimination (DWD) is another binary classification method introduced by Marron, Todd and Ahn [4]. DWD was designed for high dimension, low sample size (HDLSS) senecios, in which SVM method suffers from "data piling". \\[0.2cm]
 In HDLSS context, data piling is a problem that, after projecting data points on the line normal to the separating hyperplane, the data points tends to group together at the regions close to the positive and negative margins. Data piling implies the loss of generalizability. From the learning bound point of view, the data piling effect means the number of support vectors is large, which implies the bound of the expectation of the generalization error is loose. \\[0.2cm]
 DWD differs from SVM by taking into consideration all the data points in determining the separation hyperplane, rather than only considering points on the margin. Experiments done by Marron et.al. [4] shows that DWD can successfully avoid data piling. The projection of the data points on the direction perpendicular to the separation hyperplane are well separated.
 \subsection{Formulation}
@@ -190,7 +190,7 @@ The optimization problem for DWD is:
 Where $\mathbf{r}$ is the vector contains $r$ values. $\mathbf{Y}$ is $n$ by $n$ diagonal matrix with diagonal elements $y_i$ the labels of training data. $\mathbf{X}$ is the sample data matrix and $\boldsymbol{\xi}$ is the vector contains $\xi$ values.
 \subsection{Weighted DWD}
 (later) \\[0.2cm]
-Weighted DWD [5] can be intuitively thought as a learning algorithm lying on the 'spectrum' between the original DWD and SVM. By specify the weight, the classifier can have the performance that considering the points away from the separating hyperplane much less important. 
+Weighted DWD [5] can be intuitively thought as a learning algorithm lying on the 'spectrum' between the original DWD and SVM. By specify the weight, the classifier can have the performance that considering the points away from the separating hyperplane much less important.
 \section{References}
 [1] Vapnik 1984 \\[0.2cm]
 [2] Mohri et.al., \emph{``Foundations of Machine Learning"}, 2012 \\ [0.2cm]
